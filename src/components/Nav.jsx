@@ -35,7 +35,7 @@ const Nav = () => {
               TV PLUS
             </span>
             <span className="text-xs text-gray-600 font-medium">
-              Internet & TV Premium
+              TV & Internet Fibra Óptica
             </span>
           </div>
         </Link>

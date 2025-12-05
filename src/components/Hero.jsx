@@ -400,7 +400,7 @@ const Hero = () => {
                 <span
                   className={`block bg-gradient-to-r from-red-500 to-blue-600 bg-clip-text text-transparent`}
                 >
-                  TV e Internet Premium
+                  Internet & Televisión por Fibra Óptica
                 </span>
               </h1>
             </motion.div>

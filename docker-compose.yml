@@ -1,15 +1,15 @@
 services:
-  web-guallinet:
+  web-tvplus:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: web-Guallinet
+    container_name: web-tvplus
     ports:
-      - "8384:80"
+      - "8386:80"
     networks:
-      - webnet
+      - webtvplus
     restart: always
 
 networks:
-  webnet:
+  webtvplus:
     driver: bridge

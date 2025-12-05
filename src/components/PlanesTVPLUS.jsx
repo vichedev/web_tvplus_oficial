@@ -328,6 +328,55 @@ const PlanesTVPLUS = () => {
     },
   };
 
+  // Datos de Planes Corporativos según la imagen
+  const planesCorporativos = [
+    {
+      nombre: "ADV. PLUS",
+      velocidad: "200",
+      unidad: "MEGAS",
+      precio: 50.0,
+      color: "blue",
+      icon: "💼",
+      caracteristicaEspecial: "INCLUIDO IVA",
+    },
+    {
+      nombre: "ADV. PRIME",
+      velocidad: "500",
+      unidad: "MEGAS",
+      precio: 60.0,
+      color: "purple",
+      icon: "👑",
+      caracteristicaEspecial: "INCLUIDO IVA",
+    },
+    {
+      nombre: "ADV. MEGA",
+      velocidad: "700",
+      unidad: "MEGAS",
+      precio: 70.0,
+      color: "cyan",
+      icon: "💎",
+      caracteristicaEspecial: "INCLUIDO IVA",
+    },
+    {
+      nombre: "ADV. ULTRA",
+      velocidad: "850",
+      unidad: "MEGAS",
+      precio: 80.0,
+      color: "pink",
+      icon: "✨",
+      caracteristicaEspecial: "INCLUIDO IVA",
+    },
+    {
+      nombre: "ADV. MAX",
+      velocidad: "1000",
+      unidad: "MEGAS",
+      precio: 90.0,
+      color: "gold",
+      icon: "🏆",
+      caracteristicaEspecial: "INCLUIDO IVA",
+    },
+  ];
+
   // Función para enviar mensaje por WhatsApp
   const solicitarInformacion = (planKey) => {
     const plan = planesData[planKey];
@@ -337,6 +386,17 @@ const PlanesTVPLUS = () => {
     } - ${
       plan.soloTV ? plan.unidad : plan.velocidad + " " + plan.unidad
     } por $${plan.precio}/mes. Por favor, envíenme más información.`;
+
+    const whatsappUrl = `https://wa.me/${
+      numeroSeleccionado.numero
+    }?text=${encodeURIComponent(mensaje)}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
+  // Función para enviar mensaje de planes corporativos
+  const solicitarPlanCorporativo = (plan) => {
+    const numeroSeleccionado = numerosWhatsApp[ubicacionSeleccionada];
+    const mensaje = `¡Hola TVPLUS! Estoy interesado en el PLAN CORPORATIVO ${plan.nombre} - ${plan.velocidad} ${plan.unidad} por $${plan.precio}/mes. Necesito información sobre configuraciones personalizadas, accesos a puertos e IP pública.`;
 
     const whatsappUrl = `https://wa.me/${
       numeroSeleccionado.numero
@@ -873,11 +933,187 @@ const PlanesTVPLUS = () => {
           </div>
         </motion.div>
 
+        {/* ======================== SECCIÓN DE PLANES CORPORATIVOS ======================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0 }}
+          className="rounded-2xl backdrop-blur-sm border shadow-2xl p-8 mb-16 max-w-7xl mx-auto bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700"
+        >
+          {/* Encabezado de Planes Corporativos */}
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center justify-center px-6 py-2 text-sm font-semibold tracking-wide text-yellow-300 bg-yellow-900/30 rounded-full mb-4 backdrop-blur-sm border border-yellow-700/30">
+              <span className="w-2 h-2 rounded-full bg-yellow-400 mr-2 animate-pulse"></span>
+              TELEVISIÓN INTERNET • FIBRA ÓPTICA
+            </div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-4xl md:text-5xl font-bold mb-4 text-white"
+            >
+              <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-500 bg-clip-text text-transparent">
+                PLANES CORPORATIVOS
+              </span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-xl text-gray-300 font-semibold"
+            >
+              Soluciones avanzadas para empresas
+            </motion.p>
+          </div>
+
+          {/* Grid de 5 planes corporativos en una sola fila */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+            {planesCorporativos.map((plan, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.1 + index * 0.1 }}
+                className="text-center p-5 rounded-xl bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+              >
+                <div className="flex justify-center mb-4">
+                  <div className="p-3 rounded-full bg-gradient-to-r from-gray-700 to-gray-800 text-white border border-gray-600">
+                    <span className="text-2xl">{plan.icon}</span>
+                  </div>
+                </div>
+
+                <h3 className="text-xl font-bold text-white mb-2">
+                  {plan.nombre}
+                </h3>
+
+                {/* Velocidad destacada */}
+                <div className="mb-3">
+                  <div className="text-3xl font-bold text-white">
+                    {plan.velocidad}
+                  </div>
+                  <div className="text-sm text-gray-300">{plan.unidad}</div>
+                </div>
+
+                {/* Precio */}
+                <div className="text-2xl font-bold text-white mb-3">
+                  ${plan.precio.toFixed(2)}
+                  <span className="text-sm text-gray-400">/mensual</span>
+                </div>
+
+                {/* Característica especial */}
+                <div className="bg-gradient-to-r from-blue-900/50 to-cyan-900/50 rounded-lg p-2 mb-4 border border-blue-700/30">
+                  <span className="text-blue-300 text-xs font-bold">
+                    {plan.caracteristicaEspecial}
+                  </span>
+                </div>
+
+                {/* Botón de acción */}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => solicitarPlanCorporativo(plan)}
+                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 shadow-lg"
+                >
+                  Solicitar
+                </motion.button>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Información adicional de planes corporativos */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.6 }}
+            className="bg-gray-800/50 rounded-xl p-6 border border-gray-700"
+          >
+            <h3 className="text-xl font-bold text-center mb-6 text-white">
+              <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+                CARACTERÍSTICAS CORPORATIVAS
+              </span>
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <div className="text-center p-4 bg-gray-900/50 rounded-lg border border-gray-700">
+                <div className="text-yellow-400 text-2xl mb-2">🔧</div>
+                <h4 className="text-white font-bold text-sm mb-1">
+                  CONFIGURACIONES PERSONALIZADAS
+                </h4>
+                <p className="text-gray-400 text-xs">A medida de tu empresa</p>
+              </div>
+
+              <div className="text-center p-4 bg-gray-900/50 rounded-lg border border-gray-700">
+                <div className="text-green-400 text-2xl mb-2">🌐</div>
+                <h4 className="text-white font-bold text-sm mb-1">
+                  ACCESOS A PUERTOS E IP PÚBLICA
+                </h4>
+                <p className="text-gray-400 text-xs">
+                  Para servidores y aplicaciones
+                </p>
+              </div>
+
+              <div className="text-center p-4 bg-gray-900/50 rounded-lg border border-gray-700">
+                <div className="text-blue-400 text-2xl mb-2">⚡</div>
+                <h4 className="text-white font-bold text-sm mb-1">
+                  SOPORTE INMEDIATO
+                </h4>
+                <p className="text-gray-400 text-xs">
+                  Respuesta en menos de 15 minutos
+                </p>
+              </div>
+
+              <div className="text-center p-4 bg-gray-900/50 rounded-lg border border-gray-700">
+                <div className="text-purple-400 text-2xl mb-2">💼</div>
+                <h4 className="text-white font-bold text-sm mb-1">
+                  INSTALACIÓN $50.00
+                </h4>
+                <p className="text-gray-400 text-xs">
+                  Costo único de instalación
+                </p>
+              </div>
+            </div>
+
+            {/* Información de contacto corporativa */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+              <div className="text-center p-3 bg-gray-900/30 rounded-lg border border-gray-700">
+                <div className="text-green-400 text-lg mb-1">📞</div>
+                <h4 className="text-white font-bold text-xs mb-1">
+                  Call Center
+                </h4>
+                <p className="text-gray-300 text-sm">097 977 0078</p>
+              </div>
+
+              <div className="text-center p-3 bg-gray-900/30 rounded-lg border border-gray-700">
+                <div className="text-blue-400 text-lg mb-1">🤖</div>
+                <h4 className="text-white font-bold text-xs mb-1">Chatbot</h4>
+                <p className="text-gray-300 text-sm">098 354 5946</p>
+              </div>
+
+              <div className="text-center p-3 bg-gray-900/30 rounded-lg border border-gray-700">
+                <div className="text-yellow-400 text-lg mb-1">🔧</div>
+                <h4 className="text-white font-bold text-xs mb-1">
+                  Soporte Técnico
+                </h4>
+                <p className="text-gray-300 text-sm">098 967 2988</p>
+              </div>
+
+              <div className="text-center p-3 bg-gray-900/30 rounded-lg border border-gray-700">
+                <div className="text-purple-400 text-lg mb-1">🌐</div>
+                <h4 className="text-white font-bold text-xs mb-1">Sitio web</h4>
+                <p className="text-gray-300 text-sm">www.typlusec.net</p>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+        {/* ======================== FIN SECCIÓN PLANES CORPORATIVOS ======================== */}
+
         {/* Términos y condiciones */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1 }}
+          transition={{ delay: 1.7 }}
           className="rounded-2xl backdrop-blur-sm border shadow-xl p-6 mb-16 max-w-6xl mx-auto bg-white border-gray-200"
         >
           <h3 className="text-2xl font-bold text-center mb-6 text-gray-900">
@@ -971,7 +1207,7 @@ const PlanesTVPLUS = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.3 }}
+          transition={{ delay: 1.8 }}
           className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-2xl p-8 text-white text-center mb-12 max-w-4xl mx-auto relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-black/10"></div>
