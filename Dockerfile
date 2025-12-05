@@ -2,9 +2,19 @@
 FROM node:20 AS build
 
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+
+# 1. Copiar solo package.json primero
+COPY package.json package-lock.json* ./
+
+# 2. Limpiar y reinstalar desde cero (esto es clave)
+RUN rm -rf node_modules package-lock.json && \
+    npm cache clean --force && \
+    npm install
+
+# 3. Copiar el resto del código
 COPY . .
+
+# 4. Construir la app
 RUN npx vite build
 
 # Etapa de producción
