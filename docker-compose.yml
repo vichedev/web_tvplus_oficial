@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: web-tvplus
     ports:
-      - "80:80"
+      - "8386:80"
     networks:
       - webtvplus
     restart: always
