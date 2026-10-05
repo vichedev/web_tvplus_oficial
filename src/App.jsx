@@ -10,6 +10,8 @@ import Footer from "./components/Footer";
 import PlanesTVPLUS from "./components/PlanesTVPLUS"; // ← Nuevo nombre
 import ControlParental from "./components/ControlParental";
 import ParametrosCalidad from "./components/ParametrosCalidad";
+import CookieConsent from "./components/CookieConsent";
+import CookiePolicy from "./components/CookiePolicy";
 
 function App() {
   return (
@@ -25,9 +27,11 @@ function App() {
           <Route path="/planes-tvplus" element={<PlanesTVPLUS />} />
           <Route path="/control-parental" element={<ControlParental />} />
           <Route path="/parametros-calidad" element={<ParametrosCalidad />} />
+          <Route path="/politica-de-cookies" element={<CookiePolicy />} />
         </Routes>
       </main>
       <Footer />
+      <CookieConsent />
     </div>
   );
 }

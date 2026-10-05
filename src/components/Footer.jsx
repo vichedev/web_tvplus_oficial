@@ -12,6 +12,8 @@ import {
   FaHeart,
   FaCode,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { openCookiePreferences } from "../utils/cookieConsent";
 
 const Footer = () => {
   return (
@@ -290,6 +292,22 @@ const Footer = () => {
           <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} TVPlus. Todos los derechos reservados.
           </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm">
+            <Link
+              to="/politica-de-cookies"
+              className="text-gray-300 underline underline-offset-4 hover:text-white"
+            >
+              Política de Cookies
+            </Link>
+            <button
+              type="button"
+              onClick={openCookiePreferences}
+              className="text-gray-300 underline underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Configurar cookies
+            </button>
+          </div>
 
           <div className="flex items-center justify-center space-x-6 text-gray-500 text-sm">
             <div className="flex items-center space-x-2">
